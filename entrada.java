@@ -1,3 +1,4 @@
+
 int i = 1;
 String nome = 'Paulo';
 float num = 28.1;
@@ -6,9 +7,18 @@ char op = 's';
 boolean ativo = true;
 double resultado = 0.0;
 
-if (i == 10) {
-};
-else if (i < 5) {
-};
+if (i > 10) {
+}
+
+else if (i < 10) {
+}
+
 else {
-};
+}
+
+while ( i < 0) {
+
+}
+
+System.out.println("Programa finalizado");
+
