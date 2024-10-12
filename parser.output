@@ -1,8 +1,15 @@
+Nonterminals useless in grammar
+
+   conditionWhile
+
+
 Terminals unused in grammar
 
-   CHAT_LITERAL
-   DOUBLE_LITERAL
    FLOAT_LITERAL
+   DOUBLE_LITERAL
+   WHILE_TYPE
+   AND
+   OR
 
 
 Grammar
@@ -22,41 +29,66 @@ Grammar
     8            | DOUBLE_TYPE IDENTIFIER ASSIGN NUMBER_LITERAL
     9            | BOOLEAN_TYPE IDENTIFIER ASSIGN BOOLEAN_LITERAL
    10            | CHAR_TYPE IDENTIFIER ASSIGN STRING_LITERAL
+   11            | IF_TYPE LPARENTHESES condition RPARENTHESES LBRACE declarations RBRACE
+   12            | ELSE_IF LPARENTHESES condition RPARENTHESES LBRACE declarations RBRACE
+   13            | ELSE_TYPE LBRACE RBRACE
+
+   14 condition: IDENTIFIER EQUAL NUMBER_LITERAL
+   15          | IDENTIFIER GREATER NUMBER_LITERAL
+   16          | IDENTIFIER LESS NUMBER_LITERAL
+   17          | IDENTIFIER GREATER_EQUAL NUMBER_LITERAL
+   18          | IDENTIFIER LESS_EQUAL NUMBER_LITERAL
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-IDENTIFIER (258) 5 6 7 8 9 10
-NUMBER_LITERAL (259) 5 7 8
+IDENTIFIER (258) 5 6 7 8 9 10 14 15 16 17 18
+NUMBER_LITERAL (259) 5 7 8 14 15 16 17 18
 STRING_LITERAL (260) 6 10
-CHAT_LITERAL (261)
-BOOLEAN_LITERAL (262) 9
-INT_TYPE (263) 5
-STRING_TYPE (264) 6
-FLOAT_TYPE (265) 7
-DOUBLE_TYPE (266) 8
-BOOLEAN_TYPE (267) 9
-CHAR_TYPE (268) 10
-ASSIGN (269) 5 6 7 8 9 10
-SEMICOLON (270) 3
-DOUBLE_LITERAL (271)
-FLOAT_LITERAL (272)
+BOOLEAN_LITERAL (261) 9
+FLOAT_LITERAL (262)
+DOUBLE_LITERAL (263)
+INT_TYPE (264) 5
+STRING_TYPE (265) 6
+FLOAT_TYPE (266) 7
+DOUBLE_TYPE (267) 8
+BOOLEAN_TYPE (268) 9
+CHAR_TYPE (269) 10
+ASSIGN (270) 5 6 7 8 9 10
+EQUAL (271) 14
+SEMICOLON (272) 3
+IF_TYPE (273) 11
+ELSE_TYPE (274) 13
+ELSE_IF (275) 12
+WHILE_TYPE (276)
+LBRACE (277) 11 12 13
+RBRACE (278) 11 12 13
+LPARENTHESES (279) 11 12
+RPARENTHESES (280) 11 12
+GREATER (281) 15
+LESS (282) 16
+GREATER_EQUAL (283) 17
+LESS_EQUAL (284) 18
+AND (285)
+OR (286)
 
 
 Nonterminals, with rules where they appear
 
-$accept (18)
+$accept (32)
     on left: 0
-program (19)
+program (33)
     on left: 1, on right: 0
-declarations (20)
-    on left: 3 4, on right: 1 3
-$@1 (21)
+declarations (34)
+    on left: 3 4, on right: 1 3 11 12
+$@1 (35)
     on left: 2, on right: 3
-declaration (22)
-    on left: 5 6 7 8 9 10, on right: 3
+declaration (36)
+    on left: 5 6 7 8 9 10 11 12 13, on right: 3
+condition (37)
+    on left: 14 15 16 17 18, on right: 11 12
 
 
 State 0
@@ -69,178 +101,263 @@ State 0
     DOUBLE_TYPE   shift, and go to state 4
     BOOLEAN_TYPE  shift, and go to state 5
     CHAR_TYPE     shift, and go to state 6
+    IF_TYPE       shift, and go to state 7
+    ELSE_TYPE     shift, and go to state 8
+    ELSE_IF       shift, and go to state 9
 
     $default  reduce using rule 4 (declarations)
 
-    program       go to state 7
-    declarations  go to state 8
-    declaration   go to state 9
+    program       go to state 10
+    declarations  go to state 11
+    declaration   go to state 12
 
 
 State 1
 
     5 declaration: INT_TYPE . IDENTIFIER ASSIGN NUMBER_LITERAL
 
-    IDENTIFIER  shift, and go to state 10
+    IDENTIFIER  shift, and go to state 13
 
 
 State 2
 
     6 declaration: STRING_TYPE . IDENTIFIER ASSIGN STRING_LITERAL
 
-    IDENTIFIER  shift, and go to state 11
+    IDENTIFIER  shift, and go to state 14
 
 
 State 3
 
     7 declaration: FLOAT_TYPE . IDENTIFIER ASSIGN NUMBER_LITERAL
 
-    IDENTIFIER  shift, and go to state 12
+    IDENTIFIER  shift, and go to state 15
 
 
 State 4
 
     8 declaration: DOUBLE_TYPE . IDENTIFIER ASSIGN NUMBER_LITERAL
 
-    IDENTIFIER  shift, and go to state 13
+    IDENTIFIER  shift, and go to state 16
 
 
 State 5
 
     9 declaration: BOOLEAN_TYPE . IDENTIFIER ASSIGN BOOLEAN_LITERAL
 
-    IDENTIFIER  shift, and go to state 14
+    IDENTIFIER  shift, and go to state 17
 
 
 State 6
 
    10 declaration: CHAR_TYPE . IDENTIFIER ASSIGN STRING_LITERAL
 
-    IDENTIFIER  shift, and go to state 15
+    IDENTIFIER  shift, and go to state 18
 
 
 State 7
 
-    0 $accept: program . $end
+   11 declaration: IF_TYPE . LPARENTHESES condition RPARENTHESES LBRACE declarations RBRACE
 
-    $end  shift, and go to state 16
+    LPARENTHESES  shift, and go to state 19
 
 
 State 8
+
+   13 declaration: ELSE_TYPE . LBRACE RBRACE
+
+    LBRACE  shift, and go to state 20
+
+
+State 9
+
+   12 declaration: ELSE_IF . LPARENTHESES condition RPARENTHESES LBRACE declarations RBRACE
+
+    LPARENTHESES  shift, and go to state 21
+
+
+State 10
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 22
+
+
+State 11
 
     1 program: declarations .
 
     $default  reduce using rule 1 (program)
 
 
-State 9
+State 12
 
     3 declarations: declaration . SEMICOLON $@1 declarations
 
-    SEMICOLON  shift, and go to state 17
-
-
-State 10
-
-    5 declaration: INT_TYPE IDENTIFIER . ASSIGN NUMBER_LITERAL
-
-    ASSIGN  shift, and go to state 18
-
-
-State 11
-
-    6 declaration: STRING_TYPE IDENTIFIER . ASSIGN STRING_LITERAL
-
-    ASSIGN  shift, and go to state 19
-
-
-State 12
-
-    7 declaration: FLOAT_TYPE IDENTIFIER . ASSIGN NUMBER_LITERAL
-
-    ASSIGN  shift, and go to state 20
+    SEMICOLON  shift, and go to state 23
 
 
 State 13
 
-    8 declaration: DOUBLE_TYPE IDENTIFIER . ASSIGN NUMBER_LITERAL
+    5 declaration: INT_TYPE IDENTIFIER . ASSIGN NUMBER_LITERAL
 
-    ASSIGN  shift, and go to state 21
+    ASSIGN  shift, and go to state 24
 
 
 State 14
 
-    9 declaration: BOOLEAN_TYPE IDENTIFIER . ASSIGN BOOLEAN_LITERAL
+    6 declaration: STRING_TYPE IDENTIFIER . ASSIGN STRING_LITERAL
 
-    ASSIGN  shift, and go to state 22
+    ASSIGN  shift, and go to state 25
 
 
 State 15
 
-   10 declaration: CHAR_TYPE IDENTIFIER . ASSIGN STRING_LITERAL
+    7 declaration: FLOAT_TYPE IDENTIFIER . ASSIGN NUMBER_LITERAL
 
-    ASSIGN  shift, and go to state 23
+    ASSIGN  shift, and go to state 26
 
 
 State 16
+
+    8 declaration: DOUBLE_TYPE IDENTIFIER . ASSIGN NUMBER_LITERAL
+
+    ASSIGN  shift, and go to state 27
+
+
+State 17
+
+    9 declaration: BOOLEAN_TYPE IDENTIFIER . ASSIGN BOOLEAN_LITERAL
+
+    ASSIGN  shift, and go to state 28
+
+
+State 18
+
+   10 declaration: CHAR_TYPE IDENTIFIER . ASSIGN STRING_LITERAL
+
+    ASSIGN  shift, and go to state 29
+
+
+State 19
+
+   11 declaration: IF_TYPE LPARENTHESES . condition RPARENTHESES LBRACE declarations RBRACE
+
+    IDENTIFIER  shift, and go to state 30
+
+    condition  go to state 31
+
+
+State 20
+
+   13 declaration: ELSE_TYPE LBRACE . RBRACE
+
+    RBRACE  shift, and go to state 32
+
+
+State 21
+
+   12 declaration: ELSE_IF LPARENTHESES . condition RPARENTHESES LBRACE declarations RBRACE
+
+    IDENTIFIER  shift, and go to state 30
+
+    condition  go to state 33
+
+
+State 22
 
     0 $accept: program $end .
 
     $default  accept
 
 
-State 17
+State 23
 
     3 declarations: declaration SEMICOLON . $@1 declarations
 
     $default  reduce using rule 2 ($@1)
 
-    $@1  go to state 24
-
-
-State 18
-
-    5 declaration: INT_TYPE IDENTIFIER ASSIGN . NUMBER_LITERAL
-
-    NUMBER_LITERAL  shift, and go to state 25
-
-
-State 19
-
-    6 declaration: STRING_TYPE IDENTIFIER ASSIGN . STRING_LITERAL
-
-    STRING_LITERAL  shift, and go to state 26
-
-
-State 20
-
-    7 declaration: FLOAT_TYPE IDENTIFIER ASSIGN . NUMBER_LITERAL
-
-    NUMBER_LITERAL  shift, and go to state 27
-
-
-State 21
-
-    8 declaration: DOUBLE_TYPE IDENTIFIER ASSIGN . NUMBER_LITERAL
-
-    NUMBER_LITERAL  shift, and go to state 28
-
-
-State 22
-
-    9 declaration: BOOLEAN_TYPE IDENTIFIER ASSIGN . BOOLEAN_LITERAL
-
-    BOOLEAN_LITERAL  shift, and go to state 29
-
-
-State 23
-
-   10 declaration: CHAR_TYPE IDENTIFIER ASSIGN . STRING_LITERAL
-
-    STRING_LITERAL  shift, and go to state 30
+    $@1  go to state 34
 
 
 State 24
+
+    5 declaration: INT_TYPE IDENTIFIER ASSIGN . NUMBER_LITERAL
+
+    NUMBER_LITERAL  shift, and go to state 35
+
+
+State 25
+
+    6 declaration: STRING_TYPE IDENTIFIER ASSIGN . STRING_LITERAL
+
+    STRING_LITERAL  shift, and go to state 36
+
+
+State 26
+
+    7 declaration: FLOAT_TYPE IDENTIFIER ASSIGN . NUMBER_LITERAL
+
+    NUMBER_LITERAL  shift, and go to state 37
+
+
+State 27
+
+    8 declaration: DOUBLE_TYPE IDENTIFIER ASSIGN . NUMBER_LITERAL
+
+    NUMBER_LITERAL  shift, and go to state 38
+
+
+State 28
+
+    9 declaration: BOOLEAN_TYPE IDENTIFIER ASSIGN . BOOLEAN_LITERAL
+
+    BOOLEAN_LITERAL  shift, and go to state 39
+
+
+State 29
+
+   10 declaration: CHAR_TYPE IDENTIFIER ASSIGN . STRING_LITERAL
+
+    STRING_LITERAL  shift, and go to state 40
+
+
+State 30
+
+   14 condition: IDENTIFIER . EQUAL NUMBER_LITERAL
+   15          | IDENTIFIER . GREATER NUMBER_LITERAL
+   16          | IDENTIFIER . LESS NUMBER_LITERAL
+   17          | IDENTIFIER . GREATER_EQUAL NUMBER_LITERAL
+   18          | IDENTIFIER . LESS_EQUAL NUMBER_LITERAL
+
+    EQUAL          shift, and go to state 41
+    GREATER        shift, and go to state 42
+    LESS           shift, and go to state 43
+    GREATER_EQUAL  shift, and go to state 44
+    LESS_EQUAL     shift, and go to state 45
+
+
+State 31
+
+   11 declaration: IF_TYPE LPARENTHESES condition . RPARENTHESES LBRACE declarations RBRACE
+
+    RPARENTHESES  shift, and go to state 46
+
+
+State 32
+
+   13 declaration: ELSE_TYPE LBRACE RBRACE .
+
+    $default  reduce using rule 13 (declaration)
+
+
+State 33
+
+   12 declaration: ELSE_IF LPARENTHESES condition . RPARENTHESES LBRACE declarations RBRACE
+
+    RPARENTHESES  shift, and go to state 47
+
+
+State 34
 
     3 declarations: declaration SEMICOLON $@1 . declarations
 
@@ -250,57 +367,212 @@ State 24
     DOUBLE_TYPE   shift, and go to state 4
     BOOLEAN_TYPE  shift, and go to state 5
     CHAR_TYPE     shift, and go to state 6
+    IF_TYPE       shift, and go to state 7
+    ELSE_TYPE     shift, and go to state 8
+    ELSE_IF       shift, and go to state 9
 
     $default  reduce using rule 4 (declarations)
 
-    declarations  go to state 31
-    declaration   go to state 9
+    declarations  go to state 48
+    declaration   go to state 12
 
 
-State 25
+State 35
 
     5 declaration: INT_TYPE IDENTIFIER ASSIGN NUMBER_LITERAL .
 
     $default  reduce using rule 5 (declaration)
 
 
-State 26
+State 36
 
     6 declaration: STRING_TYPE IDENTIFIER ASSIGN STRING_LITERAL .
 
     $default  reduce using rule 6 (declaration)
 
 
-State 27
+State 37
 
     7 declaration: FLOAT_TYPE IDENTIFIER ASSIGN NUMBER_LITERAL .
 
     $default  reduce using rule 7 (declaration)
 
 
-State 28
+State 38
 
     8 declaration: DOUBLE_TYPE IDENTIFIER ASSIGN NUMBER_LITERAL .
 
     $default  reduce using rule 8 (declaration)
 
 
-State 29
+State 39
 
     9 declaration: BOOLEAN_TYPE IDENTIFIER ASSIGN BOOLEAN_LITERAL .
 
     $default  reduce using rule 9 (declaration)
 
 
-State 30
+State 40
 
    10 declaration: CHAR_TYPE IDENTIFIER ASSIGN STRING_LITERAL .
 
     $default  reduce using rule 10 (declaration)
 
 
-State 31
+State 41
+
+   14 condition: IDENTIFIER EQUAL . NUMBER_LITERAL
+
+    NUMBER_LITERAL  shift, and go to state 49
+
+
+State 42
+
+   15 condition: IDENTIFIER GREATER . NUMBER_LITERAL
+
+    NUMBER_LITERAL  shift, and go to state 50
+
+
+State 43
+
+   16 condition: IDENTIFIER LESS . NUMBER_LITERAL
+
+    NUMBER_LITERAL  shift, and go to state 51
+
+
+State 44
+
+   17 condition: IDENTIFIER GREATER_EQUAL . NUMBER_LITERAL
+
+    NUMBER_LITERAL  shift, and go to state 52
+
+
+State 45
+
+   18 condition: IDENTIFIER LESS_EQUAL . NUMBER_LITERAL
+
+    NUMBER_LITERAL  shift, and go to state 53
+
+
+State 46
+
+   11 declaration: IF_TYPE LPARENTHESES condition RPARENTHESES . LBRACE declarations RBRACE
+
+    LBRACE  shift, and go to state 54
+
+
+State 47
+
+   12 declaration: ELSE_IF LPARENTHESES condition RPARENTHESES . LBRACE declarations RBRACE
+
+    LBRACE  shift, and go to state 55
+
+
+State 48
 
     3 declarations: declaration SEMICOLON $@1 declarations .
 
     $default  reduce using rule 3 (declarations)
+
+
+State 49
+
+   14 condition: IDENTIFIER EQUAL NUMBER_LITERAL .
+
+    $default  reduce using rule 14 (condition)
+
+
+State 50
+
+   15 condition: IDENTIFIER GREATER NUMBER_LITERAL .
+
+    $default  reduce using rule 15 (condition)
+
+
+State 51
+
+   16 condition: IDENTIFIER LESS NUMBER_LITERAL .
+
+    $default  reduce using rule 16 (condition)
+
+
+State 52
+
+   17 condition: IDENTIFIER GREATER_EQUAL NUMBER_LITERAL .
+
+    $default  reduce using rule 17 (condition)
+
+
+State 53
+
+   18 condition: IDENTIFIER LESS_EQUAL NUMBER_LITERAL .
+
+    $default  reduce using rule 18 (condition)
+
+
+State 54
+
+   11 declaration: IF_TYPE LPARENTHESES condition RPARENTHESES LBRACE . declarations RBRACE
+
+    INT_TYPE      shift, and go to state 1
+    STRING_TYPE   shift, and go to state 2
+    FLOAT_TYPE    shift, and go to state 3
+    DOUBLE_TYPE   shift, and go to state 4
+    BOOLEAN_TYPE  shift, and go to state 5
+    CHAR_TYPE     shift, and go to state 6
+    IF_TYPE       shift, and go to state 7
+    ELSE_TYPE     shift, and go to state 8
+    ELSE_IF       shift, and go to state 9
+
+    $default  reduce using rule 4 (declarations)
+
+    declarations  go to state 56
+    declaration   go to state 12
+
+
+State 55
+
+   12 declaration: ELSE_IF LPARENTHESES condition RPARENTHESES LBRACE . declarations RBRACE
+
+    INT_TYPE      shift, and go to state 1
+    STRING_TYPE   shift, and go to state 2
+    FLOAT_TYPE    shift, and go to state 3
+    DOUBLE_TYPE   shift, and go to state 4
+    BOOLEAN_TYPE  shift, and go to state 5
+    CHAR_TYPE     shift, and go to state 6
+    IF_TYPE       shift, and go to state 7
+    ELSE_TYPE     shift, and go to state 8
+    ELSE_IF       shift, and go to state 9
+
+    $default  reduce using rule 4 (declarations)
+
+    declarations  go to state 57
+    declaration   go to state 12
+
+
+State 56
+
+   11 declaration: IF_TYPE LPARENTHESES condition RPARENTHESES LBRACE declarations . RBRACE
+
+    RBRACE  shift, and go to state 58
+
+
+State 57
+
+   12 declaration: ELSE_IF LPARENTHESES condition RPARENTHESES LBRACE declarations . RBRACE
+
+    RBRACE  shift, and go to state 59
+
+
+State 58
+
+   11 declaration: IF_TYPE LPARENTHESES condition RPARENTHESES LBRACE declarations RBRACE .
+
+    $default  reduce using rule 11 (declaration)
+
+
+State 59
+
+   12 declaration: ELSE_IF LPARENTHESES condition RPARENTHESES LBRACE declarations RBRACE .
+
+    $default  reduce using rule 12 (declaration)
