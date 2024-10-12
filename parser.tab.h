@@ -48,32 +48,18 @@ extern int yydebug;
     IDENTIFIER = 258,
     NUMBER_LITERAL = 259,
     STRING_LITERAL = 260,
-    BOOLEAN_LITERAL = 261,
-    FLOAT_LITERAL = 262,
-    DOUBLE_LITERAL = 263,
-    INT_TYPE = 264,
-    STRING_TYPE = 265,
-    FLOAT_TYPE = 266,
-    DOUBLE_TYPE = 267,
-    BOOLEAN_TYPE = 268,
-    CHAR_TYPE = 269,
-    ASSIGN = 270,
-    EQUAL = 271,
-    SEMICOLON = 272,
-    IF_TYPE = 273,
-    ELSE_TYPE = 274,
-    ELSE_IF = 275,
-    WHILE_TYPE = 276,
-    LBRACE = 277,
-    RBRACE = 278,
-    LPARENTHESES = 279,
-    RPARENTHESES = 280,
-    GREATER = 281,
-    LESS = 282,
-    GREATER_EQUAL = 283,
-    LESS_EQUAL = 284,
-    AND = 285,
-    OR = 286
+    CHAT_LITERAL = 261,
+    BOOLEAN_LITERAL = 262,
+    INT_TYPE = 263,
+    STRING_TYPE = 264,
+    FLOAT_TYPE = 265,
+    DOUBLE_TYPE = 266,
+    BOOLEAN_TYPE = 267,
+    CHAR_TYPE = 268,
+    ASSIGN = 269,
+    SEMICOLON = 270,
+    DOUBLE_LITERAL = 271,
+    FLOAT_LITERAL = 272
   };
 #endif
 
@@ -82,15 +68,15 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 30 "parser.y" /* yacc.c:1909  */
+#line 31 "parser.y" /* yacc.c:1909  */
 
     int yint;         // Para valores inteiros
     float yfloat;     // Para valores de ponto flutuante (float)
     double ydbl;      // Para valores de ponto flutuante (double)
     char *ystr;       // Para strings
-    int ybool;        // Para booleanos (1 para true, 0 para false)
+    int ybool;  // Para booleanos (1 para true, 0 para false)
 
-#line 94 "parser.tab.h" /* yacc.c:1909  */
+#line 80 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
