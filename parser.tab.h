@@ -60,28 +60,30 @@ extern int yydebug;
     CHAR_TYPE = 270,
     ASSIGN = 271,
     EQUAL = 272,
-    SEMICOLON = 273,
-    IF_TYPE = 274,
-    ELSE_TYPE = 275,
-    ELSE_IF = 276,
-    WHILE_TYPE = 277,
-    FOR_TYPE = 278,
-    LBRACE = 279,
-    RBRACE = 280,
-    LPARENTHESES = 281,
-    RPARENTHESES = 282,
-    PLUS_PLUS = 283,
-    MINUS_MINUS = 284,
-    DOT = 285,
-    SYSTEM = 286,
-    OUT = 287,
-    PRINTLN = 288,
-    GREATER = 289,
-    LESS = 290,
-    GREATER_EQUAL = 291,
-    LESS_EQUAL = 292,
-    AND = 293,
-    OR = 294
+    COLON = 273,
+    SEMICOLON = 274,
+    IF_TYPE = 275,
+    ELSE_TYPE = 276,
+    ELSE_IF = 277,
+    WHILE_TYPE = 278,
+    FOR_TYPE = 279,
+    LBRACE = 280,
+    RBRACE = 281,
+    LPARENTHESES = 282,
+    RPARENTHESES = 283,
+    PLUS_PLUS = 284,
+    MINUS_MINUS = 285,
+    DOT = 286,
+    SYSTEM = 287,
+    OUT = 288,
+    PRINTLN = 289,
+    GREATER = 290,
+    LESS = 291,
+    GREATER_EQUAL = 292,
+    LESS_EQUAL = 293,
+    AND = 294,
+    OR = 295,
+    QUESTION = 296
   };
 #endif
 
@@ -90,15 +92,15 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 39 "parser.y" /* yacc.c:1909  */
+#line 38 "parser.y" /* yacc.c:1909  */
 
     int yint;         // Para valores inteiros
     float yfloat;     // Para valores de ponto flutuante (float)
-    double ydouble;      // Para valores de ponto flutuante (double)
+    double ydouble;   // Para valores de ponto flutuante (double)
     char *ystr;       // Para strings
     int ybool;        // Para booleanos (1 para true, 0 para false)
 
-#line 102 "parser.tab.h" /* yacc.c:1909  */
+#line 104 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

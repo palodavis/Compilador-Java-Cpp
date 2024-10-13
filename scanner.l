@@ -9,7 +9,7 @@ extern FILE * output;
 NUMBER [0-9]*
 FLOAT [0-9]*"."[0-9]+
 DOUBLE  [0-9]+\.[0-9]+([eE][-+]?[0-9]+)?
-ID [a-z][0-9a-zA-Z_]*
+ID [a-zA-Z_][0-9a-zA-Z_]*
 STRING_LITERAL_WITH_SINGLE_QUOTE \'[^\']*\'
 STRING_LITERAL_WITH_DOUBLE_QUOTE \"[^"]*\"
 
@@ -37,11 +37,13 @@ STRING_LITERAL_WITH_DOUBLE_QUOTE \"[^"]*\"
 "else"           {printf("Reconhecido: ELSE_TYPE\n"); return(ELSE_TYPE);}
 "while"          {printf("Reconhecido: WHILE_TYPE\n"); return WHILE_TYPE; }
 "for"            {printf("Reconhecido: FOR_TYPE\n"); return FOR_TYPE; }
+"?"              {printf("Reconhecido: QUESTION\n"); return QUESTION; }
 "."              {printf("Reconhecido: FOR_TYPE\n"); return DOT; }
 "++"             {printf("Reconhecido: PLUS_PLUS\n"); return PLUS_PLUS; }
 "--"             {printf("Reconhecido: MINUS_MINUS\n"); return MINUS_MINUS; }
 "=="             {printf("Reconhecido: EQUAL\n"); return(EQUAL);}
 "="              {printf("Reconhecido: ASSIGN\n"); return(ASSIGN);}
+":"              {printf("Reconhecido: COLON\n"); return (COLON); }
 ";"              {printf("Reconhecido: SEMICOLON\n"); return (SEMICOLON); }
 "("              {printf("Reconhecido: LPARENTHESES\n"); return (LPARENTHESES); }
 ")"              {printf("Reconhecido: RPARENTHESES\n"); return (RPARENTHESES); }
