@@ -6,17 +6,22 @@ extern FILE * output;
 %option noyywrap
 
 
-NUMBER      [0-9]+(\.[0-9]+)?
+NUMBER [0-9]*
+FLOAT [0-9]*"."[0-9]+
+DOUBLE  [0-9]+\.[0-9]+([eE][-+]?[0-9]+)?
 ID [a-z][0-9a-zA-Z_]*
 STRING_LITERAL_WITH_SINGLE_QUOTE \'[^\']*\'
 STRING_LITERAL_WITH_DOUBLE_QUOTE \"[^"]*\"
 
 %%
 
-{NUMBER}        { printf("Reconhecido: NUMBER_LITERAL (%s)\n", yytext); yylval.yint = atoi(yytext); return(NUMBER_LITERAL);}
+{NUMBER}         {printf("Reconhecido: NUMBER_LITERAL (%s)\n", yytext); yylval.yint = atoi(yytext); return(NUMBER_LITERAL);}
+{FLOAT}          { printf("Reconhecido: FLOAT_LITERAL (%s)\n", yytext); yylval.yfloat = atof(yytext); return (FLOAT_LITERAL);}
+{DOUBLE}         { printf("Reconhecido: DOUBLE_LITERAL (%s)\n", yytext); yylval.ydouble = atof(yytext); return(DOUBLE_LITERAL); }
 {STRING_LITERAL_WITH_SINGLE_QUOTE}    { printf("Reconhecido: STRING_LITERAL (%s)\n", yytext); yylval.ystr = stringpool(yytext); return (STRING_LITERAL);}
 {STRING_LITERAL_WITH_DOUBLE_QUOTE}    { printf("Reconhecido: STRING_LITERAL (%s)\n", yytext); yylval.ystr = stringpool(yytext); return (STRING_LITERAL);}
-"System"         {printf("Reconhecido: SYSTEM\n"); return SYSTEM; }
+"class"          {printf("Reconhecido: CLASS\n"); return CLASS;}
+"System"         {printf("Reconhecido: SYSTEM\n"); return SYSTEM;}
 "out"            {printf("Reconhecido: OUT\n"); return OUT; }
 "println"        {printf("Reconhecido: PRINTLN\n"); return PRINTLN; }
 "int"            {printf("Reconhecido: INT_TYPE\n"); return(INT_TYPE);}

@@ -51,36 +51,37 @@ extern int yydebug;
     BOOLEAN_LITERAL = 261,
     FLOAT_LITERAL = 262,
     DOUBLE_LITERAL = 263,
-    INT_TYPE = 264,
-    STRING_TYPE = 265,
-    FLOAT_TYPE = 266,
-    DOUBLE_TYPE = 267,
-    BOOLEAN_TYPE = 268,
-    CHAR_TYPE = 269,
-    ASSIGN = 270,
-    EQUAL = 271,
-    SEMICOLON = 272,
-    IF_TYPE = 273,
-    ELSE_TYPE = 274,
-    ELSE_IF = 275,
-    WHILE_TYPE = 276,
-    FOR_TYPE = 277,
-    LBRACE = 278,
-    RBRACE = 279,
-    LPARENTHESES = 280,
-    RPARENTHESES = 281,
-    PLUS_PLUS = 282,
-    MINUS_MINUS = 283,
-    DOT = 284,
-    SYSTEM = 285,
-    OUT = 286,
-    PRINTLN = 287,
-    GREATER = 288,
-    LESS = 289,
-    GREATER_EQUAL = 290,
-    LESS_EQUAL = 291,
-    AND = 292,
-    OR = 293
+    CLASS = 264,
+    INT_TYPE = 265,
+    STRING_TYPE = 266,
+    FLOAT_TYPE = 267,
+    DOUBLE_TYPE = 268,
+    BOOLEAN_TYPE = 269,
+    CHAR_TYPE = 270,
+    ASSIGN = 271,
+    EQUAL = 272,
+    SEMICOLON = 273,
+    IF_TYPE = 274,
+    ELSE_TYPE = 275,
+    ELSE_IF = 276,
+    WHILE_TYPE = 277,
+    FOR_TYPE = 278,
+    LBRACE = 279,
+    RBRACE = 280,
+    LPARENTHESES = 281,
+    RPARENTHESES = 282,
+    PLUS_PLUS = 283,
+    MINUS_MINUS = 284,
+    DOT = 285,
+    SYSTEM = 286,
+    OUT = 287,
+    PRINTLN = 288,
+    GREATER = 289,
+    LESS = 290,
+    GREATER_EQUAL = 291,
+    LESS_EQUAL = 292,
+    AND = 293,
+    OR = 294
   };
 #endif
 
@@ -93,11 +94,11 @@ union YYSTYPE
 
     int yint;         // Para valores inteiros
     float yfloat;     // Para valores de ponto flutuante (float)
-    double ydbl;      // Para valores de ponto flutuante (double)
+    double ydouble;      // Para valores de ponto flutuante (double)
     char *ystr;       // Para strings
     int ybool;        // Para booleanos (1 para true, 0 para false)
 
-#line 101 "parser.tab.h" /* yacc.c:1909  */
+#line 102 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

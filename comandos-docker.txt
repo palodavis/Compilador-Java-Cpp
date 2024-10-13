@@ -1,0 +1,3 @@
+docker run  -it  -v "%cd%":/usr/src  phdcoder/flexbison
+
+cd /usr/src
