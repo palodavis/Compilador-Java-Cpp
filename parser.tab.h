@@ -51,39 +51,45 @@ extern int yydebug;
     BOOLEAN_LITERAL = 261,
     FLOAT_LITERAL = 262,
     DOUBLE_LITERAL = 263,
-    CLASS = 264,
-    INT_TYPE = 265,
-    STRING_TYPE = 266,
-    FLOAT_TYPE = 267,
-    DOUBLE_TYPE = 268,
-    BOOLEAN_TYPE = 269,
-    CHAR_TYPE = 270,
-    ASSIGN = 271,
-    EQUAL = 272,
-    COLON = 273,
-    SEMICOLON = 274,
-    IF_TYPE = 275,
-    ELSE_TYPE = 276,
-    ELSE_IF = 277,
-    WHILE_TYPE = 278,
-    FOR_TYPE = 279,
-    LBRACE = 280,
-    RBRACE = 281,
-    LPARENTHESES = 282,
-    RPARENTHESES = 283,
-    PLUS_PLUS = 284,
-    MINUS_MINUS = 285,
-    DOT = 286,
-    SYSTEM = 287,
-    OUT = 288,
-    PRINTLN = 289,
-    GREATER = 290,
-    LESS = 291,
-    GREATER_EQUAL = 292,
-    LESS_EQUAL = 293,
-    AND = 294,
-    OR = 295,
-    QUESTION = 296
+    PUBLIC = 264,
+    PRIVATE = 265,
+    VOID = 266,
+    CLASS = 267,
+    INT_TYPE = 268,
+    STRING_TYPE = 269,
+    FLOAT_TYPE = 270,
+    DOUBLE_TYPE = 271,
+    BOOLEAN_TYPE = 272,
+    CHAR_TYPE = 273,
+    ASSIGN = 274,
+    EQUAL = 275,
+    COLON = 276,
+    SEMICOLON = 277,
+    IF_TYPE = 278,
+    ELSE_TYPE = 279,
+    ELSE_IF = 280,
+    WHILE_TYPE = 281,
+    FOR_TYPE = 282,
+    LBRACE = 283,
+    RBRACE = 284,
+    LPARENTHESES = 285,
+    RPARENTHESES = 286,
+    PLUS_PLUS = 287,
+    MINUS_MINUS = 288,
+    DOT = 289,
+    SYSTEM = 290,
+    OUT = 291,
+    PRINTLN = 292,
+    COMMA = 293,
+    PLUS = 294,
+    PROTECTED = 295,
+    GREATER = 296,
+    LESS = 297,
+    GREATER_EQUAL = 298,
+    LESS_EQUAL = 299,
+    AND = 300,
+    OR = 301,
+    QUESTION = 302
   };
 #endif
 
@@ -94,13 +100,14 @@ union YYSTYPE
 {
 #line 38 "parser.y" /* yacc.c:1909  */
 
-    int yint;         // Para valores inteiros
-    float yfloat;     // Para valores de ponto flutuante (float)
-    double ydouble;   // Para valores de ponto flutuante (double)
-    char *ystr;       // Para strings
-    int ybool;        // Para booleanos (1 para true, 0 para false)
+        int yint;         // Para valores inteiros
+        float yfloat;     // Para valores de ponto flutuante (float)
+        double ydouble;   // Para valores de ponto flutuante (double)
+        char *ystr;       // Para strings
+        int ybool;        // Para booleanos (1 para true, 0 para false)
+    
 
-#line 104 "parser.tab.h" /* yacc.c:1909  */
+#line 111 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

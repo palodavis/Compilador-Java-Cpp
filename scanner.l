@@ -20,6 +20,10 @@ STRING_LITERAL_WITH_DOUBLE_QUOTE \"[^"]*\"
 {DOUBLE}         { printf("Reconhecido: DOUBLE_LITERAL (%s)\n", yytext); yylval.ydouble = atof(yytext); return(DOUBLE_LITERAL); }
 {STRING_LITERAL_WITH_SINGLE_QUOTE}    { printf("Reconhecido: STRING_LITERAL (%s)\n", yytext); yylval.ystr = stringpool(yytext); return (STRING_LITERAL);}
 {STRING_LITERAL_WITH_DOUBLE_QUOTE}    { printf("Reconhecido: STRING_LITERAL (%s)\n", yytext); yylval.ystr = stringpool(yytext); return (STRING_LITERAL);}
+"public"         {printf("Reconhecido: PUBLIC\n"); return PUBLIC; }
+"private"        {printf("Reconhecido: PRIVATE\n"); return PRIVATE; }
+"protected"      {printf("Reconhecido: PROTECTED\n"); return PROTECTED; }
+"void"           {printf("Reconhecido: VOID\n"); return VOID; }
 "class"          {printf("Reconhecido: CLASS\n"); return CLASS;}
 "System"         {printf("Reconhecido: SYSTEM\n"); return SYSTEM;}
 "out"            {printf("Reconhecido: OUT\n"); return OUT; }
@@ -39,10 +43,12 @@ STRING_LITERAL_WITH_DOUBLE_QUOTE \"[^"]*\"
 "for"            {printf("Reconhecido: FOR_TYPE\n"); return FOR_TYPE; }
 "?"              {printf("Reconhecido: QUESTION\n"); return QUESTION; }
 "."              {printf("Reconhecido: FOR_TYPE\n"); return DOT; }
+"+"              {printf("Reconhecido: PLUS\n"); return PLUS; }
 "++"             {printf("Reconhecido: PLUS_PLUS\n"); return PLUS_PLUS; }
 "--"             {printf("Reconhecido: MINUS_MINUS\n"); return MINUS_MINUS; }
 "=="             {printf("Reconhecido: EQUAL\n"); return(EQUAL);}
 "="              {printf("Reconhecido: ASSIGN\n"); return(ASSIGN);}
+","              {printf("Reconhecido: COMMA\n"); return (COMMA); }
 ":"              {printf("Reconhecido: COLON\n"); return (COLON); }
 ";"              {printf("Reconhecido: SEMICOLON\n"); return (SEMICOLON); }
 "("              {printf("Reconhecido: LPARENTHESES\n"); return (LPARENTHESES); }
