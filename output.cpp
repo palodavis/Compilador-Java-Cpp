@@ -38,10 +38,13 @@ for (int j = 0; j < 10; j++) {
 std::cout << "Alguma coisa" << std::endl;
 
 }
-std::cout << "A soma" << std::endl;
+int soma = num1 + num2;
 
-void calcularSoma(int a, int b) {
-b}
+std::cout << "A soma é " << std::endl;
+
+public void calcularSoma(int num1, int num2) {
+num2
+}
 
 std::cout << "Programa finalizado" << std::endl;
 

@@ -1,6 +1,4 @@
 class Pessoa {
-
-    
     int i = 1;
     int a = 2;
     int b = 5;
@@ -33,8 +31,9 @@ class Pessoa {
         System.out.println("Alguma coisa");
     }
     
-    public void calcularSoma(int a, int b) {
-        System.out.println("A soma");
+    public void calcularSoma(int num1, int num2) {
+        int soma = num1 + num2;
+        System.out.println("A soma é ");
     }
 
     System.out.println("Programa finalizado");

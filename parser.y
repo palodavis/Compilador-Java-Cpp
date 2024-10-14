@@ -127,12 +127,13 @@
         | expression LESS_EQUAL expression {$$ = (char *)malloc(100);snprintf($$, 100, "%s <= %s", $1, $3);}
         | expression AND expression {$$ = (char *)malloc(100);snprintf($$, 100, "%s && %s", $1, $3);}
         | expression OR expression {$$ = (char *)malloc(100);snprintf($$, 100, "%s || %s", $1, $3);}
+        | expression PLUS expression { $$ = (char *)malloc(100); snprintf($$, 100, "%s + %s", $1, $3);
+}
     ;
 
     method_definition:
-        access_modifier VOID IDENTIFIER LPARENTHESES parameters RPARENTHESES LBRACE method_body RBRACE
-        {
-            fprintf(output, "void %s(%s) {\n%s}\n", $3, $5, $8);
+        access_modifier VOID IDENTIFIER LPARENTHESES parameters RPARENTHESES LBRACE method_body RBRACE { 
+            fprintf(output, "%s void %s(%s) {\n%s\n}\n", $1, $3, $5, $8);
         }
     ;
 
@@ -157,8 +158,8 @@
             sprintf($$, "int %s", $2);
         }
         | STRING_TYPE IDENTIFIER { 
-            $$ = (char *)malloc(strlen("char ") + strlen($2) + 1);
-            sprintf($$, "char %s", $2);
+            $$ = (char *)malloc(strlen("char* ") + strlen($2) + 1);
+            sprintf($$, "char* %s", $2);
         }
         | FLOAT_TYPE IDENTIFIER { 
             $$ = (char *)malloc(strlen("float ") + strlen($2) + 1);
@@ -169,18 +170,25 @@
             sprintf($$, "double %s", $2);
         }
         | BOOLEAN_TYPE IDENTIFIER { 
-            $$ = (char *)malloc(strlen("boolean ") + strlen($2) + 1);
-            sprintf($$, "boolean %s", $2);
+            $$ = (char *)malloc(strlen("bool ") + strlen($2) + 1);
+            sprintf($$, "bool %s", $2);
         }
     ;
 
     method_body:
         declarations { $$ = $1; }
         | statement { $$ = $1; }
+        | method_body statement { 
+            $$ = (char *)malloc(strlen($1) + strlen($2) + 1);
+            sprintf($$, "%s%s", $1, $2);
+        }
     ;
 
     statement:
-        expression SEMICOLON { $$ = $1; }
+        expression SEMICOLON { 
+            $$ = (char *)malloc(strlen($1) + 2);
+            sprintf($$, "%s;\n", $1);
+        }
         | SYSTEM DOT OUT DOT PRINTLN LPARENTHESES STRING_LITERAL RPARENTHESES SEMICOLON {
             $$ = (char *)malloc(strlen("std::cout << ") + strlen($7) + strlen(" << std::endl;\n") + 1);
             sprintf($$, "std::cout << %s << std::endl;\n", $7);
